@@ -3,7 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.router import fincas, users, aislamientos, categorias_inventario, detalle_salvamento, detalle_huevos, galpones, incidentes_gallina, incidentes_generales, ingreso_gallinas, inventario_finca, metodo_pago, produccion_huevos, registro_sensores, salvamento, sensores, stock, tareas, tipo_gallinas, tipo_huevos, tipo_sensores, ventas
 from app.router import auth
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Incluir en el objeto app los routers
 app.include_router(users.router, prefix="/users", tags=["users"])
 app.include_router(auth.router, prefix="/access", tags=["login"])
